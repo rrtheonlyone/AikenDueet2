@@ -97,6 +97,7 @@ class Field():
         """
         assert isinstance(tetromino, Tetromino)
         assert column >= 0
+        print(column, tetromino.width())
         assert column + tetromino.width() <= Field.WIDTH
         row = self._get_tetromino_drop_row(tetromino, column)
         assert row != -1
@@ -124,8 +125,9 @@ class Field():
         h = Field.HEIGHT
         myList = []
         for i in self.state.T:
-            try:
-                myList.append(h - np.min(np.nonzero(i)))
+            checker = (np.min(np.nonzero(i)))
+            if checker != []:
+                myList.append(h - checker))
             except:
                 myList.append(0)
         out = np.asarray(myList)
