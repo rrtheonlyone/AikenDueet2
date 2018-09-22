@@ -380,7 +380,7 @@ function tetris(seqx) {
 	            }
 
 	            var numCleared = removeClears(board2, true);
-	            var score = calculateFitness(board2, numCleared*numCleared/4);
+	            var score = calculateFitness(board2, numcleared*numCleared*numCleared/4);
 	            // removePiece();
 	            if (score > bestScore) {
 	                bestID = pieceIDs[i];
@@ -471,7 +471,7 @@ function tetris(seqx) {
 	//     coefficients[6] * numBlockades;
 	var coefficients = [
 	    -0.292716,
-	    -1.0,
+	    -0.6,
 	    0.00742194,
 	    0.292781,
 	    0.182602,
@@ -506,8 +506,8 @@ function tetris(seqx) {
 	// }
 
 	// coefficients[1] = (flag) ? -1.3 : coefficients[1];
-	// coefficients[1] = (seqx.length > 150) ? -1.4 : coefficients[1];
-	// coefficients[3] = (seqx.length > 150) ? 0.35 : coefficients[3];
+	coefficients[1] = (seqx.length > 150) ? -1.0 : coefficients[1];
+	coefficients[3] = (seqx.length > 150) ? 0.35 : coefficients[3];
 
 	console.log(seqx)
 	return runSimulation(seqx);
