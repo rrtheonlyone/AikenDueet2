@@ -5,42 +5,45 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Landing {
 
-    private String planeId;
-    private String landingTime;
-    private String runway;
+    private String PlaneId;
+    private String Time;
+    private String Runway;
 
     public Landing(String planeId, int landingTimestamp, String runway) {
-        this.planeId = planeId;
-        this.runway = runway;
+        this.PlaneId = planeId;
+        this.Runway = runway;
 
         int minutes = (int) Math.round((landingTimestamp % (60 * 60)) / 60.0);
         int hours = landingTimestamp / (60 * 60);
 
-        landingTime = String.format("%02d%02d", hours, minutes);
+        Time = String.format("%02d%02d", hours, minutes);
     }
 
+    @JsonProperty("PlaneId")
     public String getPlaneId() {
-        return planeId;
+        return PlaneId;
     }
 
+    @JsonProperty("Time")
     public String getLandingTime() {
-        return landingTime;
+        return Time;
     }
 
+    @JsonProperty("Runway")
     public String getRunway() {
-        return runway;
+        return Runway;
     }
 
     public void setRunway(String runway) {
-        this.runway = runway;
+        this.Runway = Runway;
     }
 
     @Override
     public String toString() {
         return "Landing{" +
-                "planeId='" + planeId + '\'' +
-                ", landingTime='" + landingTime + '\'' +
-                ", runway='" + runway + '\'' +
+                "planeId='" + PlaneId + '\'' +
+                ", landingTime='" + Time + '\'' +
+                ", runway='" + Runway + '\'' +
                 '}';
     }
 }

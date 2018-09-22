@@ -5,19 +5,21 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class LandingDowngraded {
 
-    private String planeId;
-    private String landingTime;
+    private String PlaneId;
+    private String Time;
 
     public LandingDowngraded(String planeId, String landingTime) {
-        this.planeId = planeId;
-        this.landingTime = landingTime;
+        this.PlaneId = planeId;
+        this.Time = landingTime;
     }
 
+    @JsonProperty("PlaneId")
     public String getPlaneId() {
-        return planeId;
+        return PlaneId;
     }
 
+    @JsonProperty("Time")
     public String getLandingTime() {
-        return landingTime;
+        return Time;
     }
 }
