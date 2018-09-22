@@ -1,7 +1,10 @@
+codeit/template/solution/CustomerHotelMinDistSolution.class
 codeit/template/model/Transaction.class
 codeit/template/solution/FastestPathSolution$Edge.class
+codeit/template/resource/CustomersHotelResource.class
 codeit/template/solution/MostConnectedNodeSolution$Edge.class
 codeit/template/resource/TwoDinosaursResource.class
+codeit/template/model/Pair.class
 codeit/template/solution/TwoDinosaursSolution.class
 codeit/template/model/FastestPath.class
 codeit/template/model/TwoDinosaurs.class
@@ -11,6 +14,7 @@ codeit/template/solution/TallyExpensesSolution.class
 codeit/template/resource/TallyExpensesResource.class
 codeit/template/solution/MessageBroadcastSolution$Edge.class
 codeit/template/solution/MessageBroadcastSolution.class
+codeit/template/solution/CustomerHotelMinCampSolution.class
 codeit/template/solution/MostConnectedNodeSolution.class
 codeit/template/model/TallyExpenses.class
 codeit/template/model/Expense.class
