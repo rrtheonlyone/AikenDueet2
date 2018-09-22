@@ -1,34 +1,34 @@
 def primeSum(n):
-    some_list = [True for i in range(100000)]
+    some_list = [True for i in range(1000000)]
     some_list[0] = some_list[1] = False;
-    prime_list = set()
-    for i in range(100000):
+    prime_list = []
+    prime_set = set()
+    for i in range(1000000):
         if not some_list[i]:
             continue
-        prime_list.add(i)
-        for j in range(i,100000/i):
+        prime_set.add(i)
+        prime_list.append(i)
+        for j in range(i,1000000//i):
             some_list[j*i] = False
 
     # Append the output to the output list
     out = []
-    k = n+1
 
-    #bookkeeping
-    initn = n
+    # Case when n is odd
+    if (n % 2 == 1):
+        out.append(3)
+        n -= 3
 
-    # while n is not broken
-    while n:
-        if k < 2:
+    counter = 2
+    while True:
+        diff = n - prime_list[counter]
+        if diff in prime_set:
+            out.append(diff)
+            out.append(prime_list[counter])
             break
-        if k in prime_list:
-            out.append(k)
-            n -= k
-            k = n+1
-        k -= 1
+        else:
+            counter += 1
 
-    if (k < 2 and n != 0):
-        print (initn)
-    else:
-        print (out)
+    return out
 
-primeSum(int(input()))
+print(primeSum(int(input())))
