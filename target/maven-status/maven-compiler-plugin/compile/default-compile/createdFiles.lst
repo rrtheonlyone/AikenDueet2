@@ -1,3 +1,8 @@
+codeit/template/model/Transaction.class
+codeit/template/solution/TallyExpensesSolution.class
+codeit/template/resource/TallyExpensesResource.class
 codeit/template/resource/TwoDinosaursResource.class
+codeit/template/model/TallyExpenses.class
+codeit/template/model/Expense.class
 codeit/template/solution/TwoDinosaursSolution.class
 codeit/template/model/TwoDinosaurs.class

@@ -15,7 +15,7 @@ import java.math.BigInteger;
 @RestController
 public class TwoDinosaursResource {
 
-    @RequestMapping("/test")
+    @RequestMapping("/two-dinosaurs")
     public String hello(){
         return  "Testing two dinosaurs damnnn...";
     }

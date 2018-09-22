@@ -1,6 +1,7 @@
 package codeit.template.solution;
 
 import java.math.BigInteger;
+import java.util.*;
 
 public class TwoDinosaursSolution {
 
@@ -45,6 +46,10 @@ public class TwoDinosaursSolution {
         this.leonardo = leonardo;
         this.maxDiff = maxDiff;
 
+        System.out.println(Arrays.toString(raphael));
+        System.out.println(Arrays.toString(leonardo));
+        System.out.println(maxDiff);
+
         int maxIntermediateDiff = 0;
         for (int food : raphael) {
             maxIntermediateDiff += food;
@@ -59,7 +64,9 @@ public class TwoDinosaursSolution {
     }
 
     public BigInteger solve() {
-        return dp(0, 0);
+        BigInteger res = dp(0, 0);
+        System.out.println("RESULT: "  + res);
+        return res;
     }
 
     public static void main(String[] args) {
