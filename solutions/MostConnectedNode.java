@@ -1,6 +1,7 @@
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.TreeMap;
 
 public class MostConnectedNode {
     private static class Edge {
@@ -34,12 +35,12 @@ public class MostConnectedNode {
         }
     }
 
-    private HashMap<String, ArrayList<Edge>> adjList;
+    private TreeMap<String, ArrayList<Edge>> adjList;
     private HashMap<String, Integer> incomingDegree;
     private HashMap<String, Boolean> isVisited;
 
     public MostConnectedNode(String[] dataArray) {
-        adjList = new HashMap<>();
+        adjList = new TreeMap<>();
         incomingDegree = new HashMap<>();
 
         for (String data : dataArray) {
@@ -133,7 +134,7 @@ public class MostConnectedNode {
     }
 
     public static void main(String[] args) {
-        String[] dataArray = new String[]{"A->B" , "B->C" , "B->D" , "E->F"};
+        String[] dataArray = new String[]{"C->D" , "B->C" , "D->B" , "E->F"};
         MostConnectedNode mostConnectedNode = new MostConnectedNode(dataArray);
 
         System.out.println(mostConnectedNode.solve());
