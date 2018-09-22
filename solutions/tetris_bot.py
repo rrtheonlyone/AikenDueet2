@@ -27,5 +27,4 @@ if __name__ == '__main__':
             'drop': ' '
         })
 
-        print (field)
     print (out)
