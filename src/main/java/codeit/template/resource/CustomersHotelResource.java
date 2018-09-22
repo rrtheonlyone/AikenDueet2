@@ -34,6 +34,7 @@ public class CustomersHotelResource {
 
     @RequestMapping(value = "/customers-and-hotel/minimum-camps",method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     public HashMap<String, Integer> solveSecond(@RequestBody ArrayList<Pair> body) {
+
         CustomerHotelMinCampSolution ms = new CustomerHotelMinCampSolution(body);
         int res = ms.solve();
 

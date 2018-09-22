@@ -1,10 +1,16 @@
 package codeit.template.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Pair implements Comparable<Pair>{
+
+    @JsonProperty("pos")
     public long head;
+    
+    @JsonProperty("distance")
     public long tail;
 
-    public Pair(long a, long b){
+    public Pair(@JsonProperty("pos") long a, @JsonProperty("distance") long b){
         this.head = a;
         this.tail = b;
     }
