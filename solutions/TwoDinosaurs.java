@@ -1,40 +1,37 @@
+import java.math.BigInteger;
+
 public class TwoDinosaurs {
 
     private static final int OFFSET = 400000;
-    private static final long NOT_CALC = -1;
+    private static final BigInteger NOT_CALC = BigInteger.valueOf(-1);
 
     private int numFood;
     private int[] raphael;
     private int[] leonardo;
     private int maxDiff;
-    private long[][] memoTable; // prepare for BigInteger
+    private BigInteger[][] memoTable; // prepare for BigInteger
 
-    private long dp(int foodIndex, int difference) {
+    private BigInteger dp(int foodIndex, int difference) {
         if (foodIndex >= numFood) {
             if (Math.abs(difference) <= maxDiff) {
-                return 1;
+                return BigInteger.ONE;
             } else {
-                return 0;
+                return BigInteger.ZERO;
             }
         } else if (memoTable[foodIndex][difference + OFFSET] != NOT_CALC) {
             return memoTable[foodIndex][difference + OFFSET];
         }
 
-        memoTable[foodIndex][difference + OFFSET] = 0;
-
-        long ans = 0;
+        BigInteger ans = BigInteger.ZERO;
 
         // Take both
-        ans += dp(foodIndex + 1,difference + raphael[foodIndex] - leonardo[foodIndex]);
-
+        ans = ans.add(dp(foodIndex + 1,difference + raphael[foodIndex] - leonardo[foodIndex]));
         // Take Raphael
-        ans += dp(foodIndex + 1, difference + raphael[foodIndex]);
-
+        ans = ans.add(dp(foodIndex + 1, difference + raphael[foodIndex]));
         // Take Leo
-        ans += dp(foodIndex + 1, difference - leonardo[foodIndex]);
-
+        ans = ans.add(dp(foodIndex + 1, difference - leonardo[foodIndex]));
         // Take nothing
-        ans += dp(foodIndex + 1, difference);
+        ans = ans.add(dp(foodIndex + 1, difference));
 
         return memoTable[foodIndex][difference + OFFSET] = ans;
     }
@@ -51,7 +48,7 @@ public class TwoDinosaurs {
             maxIntermediateDiff += food;
         }
 
-        memoTable = new long[numFood][maxIntermediateDiff + OFFSET + 1];
+        memoTable = new BigInteger[numFood][maxIntermediateDiff + OFFSET + 1];
         for (int i = 0; i < numFood; ++i) {
             for (int j = 0; j < maxIntermediateDiff + OFFSET + 1; ++j) {
                 memoTable[i][j] = NOT_CALC;
@@ -59,7 +56,7 @@ public class TwoDinosaurs {
         }
     }
 
-    public long solve() {
+    public BigInteger solve() {
         return dp(0, 0);
     }
 
