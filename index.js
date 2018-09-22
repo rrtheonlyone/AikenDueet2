@@ -311,6 +311,14 @@ function tetris(seqx) {
 	        }
 	        heights.push(currHeight);
 	    }
+
+	   	for (var i = 0; i < 5; i++){
+		   	if (seqx[i+currPieceIndex] == 'I'){
+		   		coefficients[0] = 0.1
+	   			break;
+	   		}
+	   	}
+
 	    var fitness =   coefficients[0] * heightDifferences +
 	                    coefficients[1] * numHoles +
 	                    coefficients[2] * (BOARD_HEIGHT - maxHeight) +
@@ -349,6 +357,15 @@ function tetris(seqx) {
 	    //             }
 	    //         }
 	    //     }
+
+    coefficients = [
+	    -0.192716,
+	    -1,
+	    0.00742194,
+	    0.592781,
+	    0.182602,
+	    0.175692,
+	    -0.0439177];
 
 	        return fitness; // + 0*bestScore;
 	    // }
@@ -407,10 +424,12 @@ function tetris(seqx) {
 	    return num - 17;
 	}
 
+	var currPieceIndex = 0;
+
 	function runSimulation(seq) {
 	    out = [];
-	    for (var i = 0; i < seq.length; i++){
-	        switch (seq[i]) {
+	    for (; currPieceIndex < seq.length; currPieceIndex++){
+	        switch (seq[currPieceIndex]) {
 	            case 'O':
 	                currPiece = 0;
 	                break;
