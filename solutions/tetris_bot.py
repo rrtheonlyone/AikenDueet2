@@ -19,12 +19,7 @@ def tetris_solver(seq):
 
         current_tetromino.rotate(rotation)
         field.drop(current_tetromino, column)
-        keys = Optimizer.get_keystrokes(rotation, column, {
-            'rotate_right': 'x',
-            'rotate_left': 'z',
-            'move_left': 'left',
-            'move_right': 'right',
-            'drop': ' '
-        })
 
     return out
+
+

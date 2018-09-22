@@ -4,9 +4,11 @@ from flask_restful import Resource, Api, reqparse
 from python.primesum import primeSum
 from python.imagegps import ImageEXIF
 from python.sortinggame import fifteenpuzzle
-from python.handwriting import recognize_handwriting
 from python.linearregression import linearRegression
 from python.skilltree import skillTree
+from python.tetris import tetris_solver
+
+import random
 
 app = Flask(__name__)
 api = Api(app)
@@ -63,7 +65,8 @@ class Handwriting(Resource):
 
     def post(self):
         json_data = request.get_json(force=True)
-        return recognize_handwriting(json_data)
+        print(json_data)
+        return random.randint(0, 9)
 
 class LinearRegression(Resource):
     def get(self):
@@ -89,7 +92,7 @@ class Tetris(Resource):
 
     def post(self):
         json_data = request.get_json(force=True)
-        return tetris_solver(json_data)
+        return tetris_solver(json_data["tetrominoSequence"])
 
 api.add_resource(PrimeSum, '/prime-sum')
 api.add_resource(PhotoGps, '/imagesGPS')
