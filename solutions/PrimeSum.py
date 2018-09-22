@@ -18,8 +18,11 @@ def primeSum(n):
     if (n % 2 == 1):
         out.append(3)
         n -= 3
+        counter = 2
 
-    counter = 2
+    else:
+        counter = 1
+
     while True:
         diff = n - prime_list[counter]
         if diff in prime_set:
