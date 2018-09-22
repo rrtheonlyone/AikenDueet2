@@ -25,7 +25,7 @@ class PhotoGps(Resource):
 
 	def post(self):
 		json_data = request.get_json(force=True)
-		return json_data
+		return ImageEXIF(json_data)
 
 
 
