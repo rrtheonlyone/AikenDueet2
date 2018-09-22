@@ -3,38 +3,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import codeit.template.model.Expense;
+
 public class TallyExpenses {
-    public static class Expense {
-        public double amount;
-        private String paidBy;
-        private String[] excluded;
-
-        public Expense(double amount, String paidBy) {
-            this(amount, paidBy, null);
-        }
-
-        public Expense(double amount, String paidBy, String[] excluded) {
-            this.amount = amount;
-            this.paidBy = paidBy;
-
-            if (excluded == null) {
-                excluded = new String[0];
-            }
-            this.excluded = excluded;
-        }
-
-        public double getAmount() {
-            return amount;
-        }
-
-        public String getPaidBy() {
-            return paidBy;
-        }
-
-        public String[] getExcluded() {
-            return excluded;
-        }
-    }
 
     public static class Transaction {
         private String from;
