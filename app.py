@@ -37,16 +37,18 @@ class SortingGame(Resource):
         game_data = json_data['puzzle']
         puzzle = []
 
+        gridSize = len(game_data)
+
         for i in game_data:
             for j in i:
-                puzzle.append(j)
+                square = j
+                if square == 0:
+                    square = gridSize*gridSize
+                square -= 1
+                puzzle.append(square)
 
         puzzle = tuple(puzzle)
 
-        if (len(puzzle) == 9):
-            gridSize = 3
-        else:
-            gridSize = 4
 
         res = fifteenpuzzle(gridSize, puzzle)
         answer_json = {"result": res}
