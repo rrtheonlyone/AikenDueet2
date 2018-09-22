@@ -471,9 +471,9 @@ function tetris(seqx) {
 	//     coefficients[6] * numBlockades;
 	var coefficients = [
 	    -0.192716,
-	    -1,
+	    -0.4,
 	    0.00742194,
-	    0.8,
+	    0.75,
 	    0.182602,
 	    0.175692,
 	    -0.0439177];
