@@ -112,22 +112,7 @@ function tetris(seqx) {
 	// Board holds the state of the board as it is manipulated by the AI. Type: [char][char]
 	var Board = [];
 
-	// Coefficients:
-	//     coefficients[0] * heightDifferences +
-	//     coefficients[1] * numHoles +
-	//     coefficients[2] * (BOARD_HEIGHT - maxHeight) +
-	//     coefficients[3] * numCleared +
-	//     coefficients[4] * firstHeight +
-	//     coefficients[5] * lastHeight +
-	//     coefficients[6] * numBlockades;
-	var coefficients = [
-	    -0.192716,
-	    -1,
-	    0.00742194,
-	    0.292781,
-	    0.182602,
-	    0.175692,
-	    -0.0439177];
+
 
 	/* can be improved by only checking rows that the last piece was inserted in !!
 	 *  also by using something other than erase, insert.*/
@@ -476,7 +461,50 @@ function tetris(seqx) {
 	    printBoard();
 	}
 
+	// Coefficients:
+	//     coefficients[0] * heightDifferences +
+	//     coefficients[1] * numHoles +
+	//     coefficients[2] * (BOARD_HEIGHT - maxHeight) +
+	//     coefficients[3] * numCleared +
+	//     coefficients[4] * firstHeight +
+	//     coefficients[5] * lastHeight +
+	//     coefficients[6] * numBlockades;
+	var coefficients = [
+	    -0.192716,
+	    -1,
+	    0.00742194,
+	    0.292781,
+	    0.182602,
+	    0.175692,
+	    -0.0439177];
+
 	main();
+
+
+	//seqx only contains S, Z and T -> co[1] = -0.25
+	//seqx only contains O and I -> co[1] = -1.3
+
+	var flag = 1;
+
+	for (var i = 0; i < 100; i++) {
+		if (seqx[i] != 'S' && seqx[i] != "Z" && seqx[i] != "T") {
+			flag = 0;
+			break;
+		}
+	}
+
+	coefficients[1] = (flag) ? -0.25 : coefficients[1];
+
+	flag = 1;
+	for (var i = 0; i < 100; i++) {
+		if (seqx[i] != 'O' && seqx[i] != "I"){
+			flag = 0;
+			break;
+		}
+	}
+
+	coefficients[1] = (flag) ? -1.3 : coefficients[1];
+
 	console.log(seqx)
 	return runSimulation(seqx);
 
