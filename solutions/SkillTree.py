@@ -10,7 +10,7 @@ theNext = {
       "name": "Grapple Gun",
       "offense": 5,
       "points": 1,
-      "require": "null"
+      "require": None
     },
     {
       "name": "Hacking Device",
@@ -34,7 +34,7 @@ theNext = {
       "name": "Inverted takedown",
       "offense": 5,
       "points": 1,
-      "require": "null"
+      "require": None
     },
     {
       "name": "Shockwave attack",
@@ -48,7 +48,7 @@ theNext = {
 
 
 def skillTree(inputJSON):
-    head = ["null", "null", "null"]
+    head = ["zzlaten", "zzlaten", "zlaten"]
     numberSkills = [1, 1, 1]
     currcostSkills = [0, 0, 0]
     currvalueSkills = [0,0,0]
@@ -63,7 +63,10 @@ def skillTree(inputJSON):
             if i == None:
                 continue
             for j in range(3):
-                if i["require"] == head[j]:
+                nexty = i["require"]
+                if nexty == None:
+                    nexty = "zzlaten"
+                if nexty == head[j]:
                     dpCost[j].append(currcostSkills[j] + i["points"])
                     dpValue[j].append(currvalueSkills[j] + i["offense"])
                     name[j].append(i["name"])
@@ -92,4 +95,4 @@ def skillTree(inputJSON):
             out.append(name[i][j])
     return (out)
 
-skillTree(theNext)
+print(skillTree(theNext))
