@@ -341,9 +341,9 @@ class Field():
         return (factors * weights).sum()
 
 
-if __name__ == '__main__':
+
+def tetris_solver(seq):
     field = Field()
-    seq = input()
     next_tetromino = None
     out = []
     starttime = time.clock()
@@ -367,3 +367,4 @@ if __name__ == '__main__':
     except:
         pass
     print (out + [0] * (len(seq) - len(out)))
+
