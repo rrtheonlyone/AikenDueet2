@@ -474,6 +474,7 @@ function tetris(seqx) {
 	}
 
 	main();
+	console.log(seqx)
 	return runSimulation(seqx);
 
 }
