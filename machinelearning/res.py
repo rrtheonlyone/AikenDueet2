@@ -3,7 +3,6 @@ from keras.models import load_model
 from keras.preprocessing.image import img_to_array, load_img
 
 import numpy as np
-import cv2
 
 def runner(s):
 	model = load_model('./machinelearning/mnist_keras_cnn_model.h5')
