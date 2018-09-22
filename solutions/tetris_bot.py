@@ -195,7 +195,7 @@ class Optimizer():
 class Field():
 
     WIDTH = 10
-    HEIGHT = 22
+    HEIGHT = 20
 
     def __init__(self, state=None):
         if state is not None:
@@ -303,7 +303,7 @@ class Field():
                     begin = True
                 elif begin:
                     gaps += 1
-            begin = False
+
         return gaps
 
     def heights(self):
@@ -362,9 +362,10 @@ def tetris_solver(seq):
 
             current_tetromino.rotate(rotation)
             field.drop(current_tetromino, column)
-            print (field)
 
     except:
         pass
     print (out + [0] * (len(seq) - len(out)))
+
+tetris_solver(input())
 
