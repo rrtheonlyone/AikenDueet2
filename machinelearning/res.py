@@ -4,23 +4,28 @@ from keras.preprocessing.image import img_to_array, load_img
 
 import numpy as np
 
-def runner(s):
-	model = load_model('./machinelearning/mnist_keras_cnn_model.h5')
+# def runner(s):
+# 	model = load_model('./machinelearning/mnist_keras_cnn_model.h5')
 
-	model.compile(loss=keras.losses.categorical_crossentropy,
-              optimizer=keras.optimizers.Adam(),
-              metrics=['accuracy'])
+# 	if
+# 	model.compile(loss=keras.losses.categorical_crossentropy,
+#               optimizer=keras.optimizers.Adam(),
+#               metrics=['accuracy'])
 
-	return model.predict(s)
+# 	return model.predict(s)
 
 
 def pre_process(raw_input):
 	res = []
+	model = load_model('./machinelearning/mnist_keras_cnn_model.h5')
+	model.compile(loss=keras.losses.categorical_crossentropy,
+              optimizer=keras.optimizers.Adam(),
+              metrics=['accuracy'])
 
 	for x in raw_input:
 		x = np.array(x)
 		x = x.reshape(1, 28, 28, 1)
-		out = [int(y+0.5) for y in runner(x).tolist()[0]]
+		out = [int(y+0.5) for y in model.predict(x).tolist()[0]]
 		res.append(out.index(1))
 
 	return res
