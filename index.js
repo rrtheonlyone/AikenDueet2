@@ -470,10 +470,10 @@ function tetris(seqx) {
 	//     coefficients[5] * lastHeight +
 	//     coefficients[6] * numBlockades;
 	var coefficients = [
-	    -0.292716,
-	    -0.6,
+	    -0.192716,
+	    -1,
 	    0.00742194,
-	    0.292781,
+	    0.592781,
 	    0.182602,
 	    0.175692,
 	    -0.0439177];
@@ -506,8 +506,8 @@ function tetris(seqx) {
 	// }
 
 	// coefficients[1] = (flag) ? -1.3 : coefficients[1];
-	coefficients[1] = (seqx.length > 150) ? -1.0 : coefficients[1];
-	coefficients[3] = (seqx.length > 150) ? 0.35 : coefficients[3];
+	// coefficients[1] = (seqx.length > 150) ? -1.0 : coefficients[1];
+	// coefficients[3] = (seqx.length > 150) ? 0.35 : coefficients[3];
 
 	console.log(seqx)
 	return runSimulation(seqx);
