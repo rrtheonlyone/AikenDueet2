@@ -4,6 +4,8 @@ from flask_restful import Resource, Api, reqparse
 from python.primesum import primeSum
 from python.imagegps import ImageEXIF
 from python.sortinggame import fifteenpuzzle
+from python.handwriting import recognize_handwriting
+from python.linearregression import linearRegression
 
 app = Flask(__name__)
 api = Api(app)
@@ -54,11 +56,34 @@ class SortingGame(Resource):
         answer_json = {"result": res}
         return jsonify(answer_json)
 
+class Handwriting(Resource):
+    def get(self):
+        return "This is the answer to the handwriting problem"
+
+    def post(self):
+        json_data = request.get_json(force=True)
+        return recognize_handwriting(json_data)
+
+class LinearRegression(Resource):
+    def get(self):
+        return "This is the answer to the linear regression problem"
+
+    def post(self):
+        json_data = request.get_json(force=True)
+        res = linearRegression(json_data["input"], json_data["output"], json_data["question"])
+        answer_json = {"answer" : res}
+        return jsonify(answer_json)
 
 
 api.add_resource(PrimeSum, '/prime-sum')
 api.add_resource(PhotoGps, '/imagesGPS')
-api.add_resource(SortingGame, '/sorting-game')
+api.add_resource(Handwriting, '/machine-learning/question-2')
+api.add_resource(LinearRegression, '/machine-learning/question-1')
 
 if __name__ == '__main__':
     app.run(debug=True)
+
+
+
+
+
