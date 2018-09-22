@@ -99,6 +99,6 @@ class ImageMetaData(object):
                 lng = self.convert_to_degress(gps_longitude)
                 if gps_longitude_ref != "E":
                     lng = 0 - lng
-        return lat, lng
+        return {"lat": lat, "long": lng}
 
 # print(ImageEXIF([{"path": 'https://www.thesun.co.uk/wp-content/uploads/2016/04/1394866.main_image.jpg?strip=all'}]))
