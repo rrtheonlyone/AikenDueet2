@@ -507,7 +507,7 @@ function tetris(seqx) {
 
 	// coefficients[1] = (flag) ? -1.3 : coefficients[1];
 
-	coefficients[0] = (seqx.length > 150) ? 0.15 : coefficients[0];
+	coefficients[0] = (seqx.length > 150) ? 0.02 : coefficients[0];
 	coefficients[1] = (seqx.length > 150) ? -1.0 : coefficients[1];
 	coefficients[3] = (seqx.length > 150) ? 0.35 : coefficients[3];
 
