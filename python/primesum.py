@@ -1,4 +1,6 @@
 def primeSum(n):
+    if n < 8: 
+        return n
     some_list = [True for i in range(1000000)]
     some_list[0] = some_list[1] = False;
     prime_list = []
