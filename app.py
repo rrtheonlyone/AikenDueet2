@@ -81,14 +81,22 @@ class SkillTree(Resource):
     
     def post(self):
         json_data = request.get_json(force=True)
-        return skillTree(json_data)
+        return jsonify(skillTree(json_data))
 
+class Tetris(Resource):
+    def get(self):
+        return "This is the answer to the tetris problem"
+
+    def post(self):
+        json_data = request.get_json(force=True)
+        return tetris_solver(json_data)
 
 api.add_resource(PrimeSum, '/prime-sum')
 api.add_resource(PhotoGps, '/imagesGPS')
 api.add_resource(Handwriting, '/machine-learning/question-2')
 api.add_resource(LinearRegression, '/machine-learning/question-1')
 api.add_resource(SkillTree, '/skill-tree')
+api.add_resource(Tetris, '/tetris')
 
 if __name__ == '__main__':
     app.run(debug=True)

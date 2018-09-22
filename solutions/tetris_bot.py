@@ -4,9 +4,9 @@ from field import Field
 from optimizer import Optimizer
 from tetromino import Tetromino
 
-if __name__ == '__main__':
+
+def tetris_solver(seq):
     field = Field()
-    seq = input()
     next_tetromino = None
     out = []
     for i in seq:
@@ -27,4 +27,4 @@ if __name__ == '__main__':
             'drop': ' '
         })
 
-    print (out)
+    return out
