@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.*;
+import java.math.BigInteger;
 
 @RestController
 public class TwoDinosaursResource {
@@ -20,7 +21,7 @@ public class TwoDinosaursResource {
     }
 
    	@RequestMapping(value = "two-dinosaurs",method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-    public HashMap<String, Long> solve(@RequestBody TwoDinosaurs body){
+    public HashMap<String, BigInteger> solve(@RequestBody TwoDinosaurs body){
        
         int numFood = body.getNumFood();
         int[] raphael = body.getRaphael();
@@ -28,13 +29,13 @@ public class TwoDinosaursResource {
         int maxDiff = body.getMaxDiff();
 
     	TwoDinosaursSolution dinosaurs = new TwoDinosaursSolution(numFood, raphael, leonardo, maxDiff);
-        long res = dinosaurs.solve();
+        BigInteger res = dinosaurs.solve();
 
 
-        HashMap<String, Long> o = new HashMap<>();
-        o.put("result", res);
+        HashMap<String, BigInteger> output = new HashMap<>();
+        output.put("result", res);
 
-        return o;
+        return output;
 
     }
 }
