@@ -380,7 +380,7 @@ function tetris(seqx) {
 	            }
 
 	            var numCleared = removeClears(board2, true);
-	            var score = calculateFitness(board2, numcleared*numCleared*numCleared/4);
+	            var score = calculateFitness(board2, numCleared*numCleared*numCleared/8);
 	            // removePiece();
 	            if (score > bestScore) {
 	                bestID = pieceIDs[i];
