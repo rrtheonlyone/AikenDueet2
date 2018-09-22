@@ -471,7 +471,7 @@ function tetris(seqx) {
 	//     coefficients[6] * numBlockades;
 	var coefficients = [
 	    -0.192716,
-	    -1,
+	    -1.4,
 	    0.00742194,
 	    0.292781,
 	    0.182602,
@@ -503,7 +503,7 @@ function tetris(seqx) {
 		}
 	}
 
-	coefficients[1] = (flag) ? -1.3 : coefficients[1];
+	coefficients[1] = (flag) ? -1.7 : coefficients[1];
 
 	console.log(seqx)
 	return runSimulation(seqx);
