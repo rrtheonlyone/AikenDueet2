@@ -75,6 +75,7 @@ class LinearRegression(Resource):
         return jsonify(answer_json)
 
 
+
 api.add_resource(PrimeSum, '/prime-sum')
 api.add_resource(PhotoGps, '/imagesGPS')
 api.add_resource(Handwriting, '/machine-learning/question-2')
