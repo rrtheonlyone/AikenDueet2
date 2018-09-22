@@ -484,30 +484,30 @@ function tetris(seqx) {
 	//seqx only contains S, Z and T -> co[1] = -0.25
 	//seqx only contains O and I -> co[1] = -1.3
 
-	var flag = 1;
+	// var flag = 1;
 
-	for (var i = 0; i < 100; i++) {
-		if (seqx[i] != 'S' && seqx[i] != "Z" && seqx[i] != "T") {
-			flag = 0;
-			break;
-		}
-	}
+	// for (var i = 0; i < 100; i++) {
+	// 	if (seqx[i] != 'S' && seqx[i] != "Z" && seqx[i] != "T") {
+	// 		flag = 0;
+	// 		break;
+	// 	}
+	// }
 
-	coefficients[1] = (flag) ? -0.5 : coefficients[1];
-	coefficients[3] = (flag) ? 0.35 : coefficients[3];
-	coefficients[0] = (flag) ? -0.6 : coefficients[0];
+	// coefficients[1] = (flag) ? -0.5 : coefficients[1];
+	// coefficients[3] = (flag) ? 0.35 : coefficients[3];
+	// coefficients[0] = (flag) ? -0.6 : coefficients[0];
 
-	flag = 1;
-	for (var i = 0; i < 100; i++) {
-		if (seqx[i] != 'O' && seqx[i] != "I"){
-			flag = 0;
-			break;
-		}
-	}
+	// flag = 1;
+	// for (var i = 0; i < 100; i++) {
+	// 	if (seqx[i] != 'O' && seqx[i] != "I"){
+	// 		flag = 0;
+	// 		break;
+	// 	}
+	// }
 
-	coefficients[1] = (flag) ? -1.3 : coefficients[1];
-	coefficients[1] = (seqx.length > 150) ? -1.4 : coefficients[1];
-	coefficients[3] = (seqx.length > 150) ? 0.35 : coefficients[3];
+	// coefficients[1] = (flag) ? -1.3 : coefficients[1];
+	// coefficients[1] = (seqx.length > 150) ? -1.4 : coefficients[1];
+	// coefficients[3] = (seqx.length > 150) ? 0.35 : coefficients[3];
 
 	console.log(seqx)
 	return runSimulation(seqx);
