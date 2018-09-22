@@ -37,7 +37,6 @@ public class MostConnectedNode {
 
     private TreeMap<String, ArrayList<Edge>> adjList;
     private HashMap<String, Integer> incomingDegree;
-    private HashMap<String, Boolean> isVisited;
 
     public MostConnectedNode(String[] dataArray) {
         adjList = new TreeMap<>();
@@ -46,11 +45,6 @@ public class MostConnectedNode {
         for (String data : dataArray) {
             addEdge(Edge.parseEdge(data));
         }
-
-        isVisited = new HashMap<>();
-        for (String vertex : adjList.keySet()) {
-            isVisited.put(vertex, false);
-        }
     }
 
     public String solve() {
@@ -58,28 +52,13 @@ public class MostConnectedNode {
         String answer = "";
 
         for (String vertex : adjList.keySet()) {
-            if (!isVisited.get(vertex) && incomingDegree.get(vertex) == 0) {
-                int numConnections = bfs(vertex);
+            int numConnections = bfs(vertex);
 
-                if (numConnections > maxConnections) {
-                    maxConnections = numConnections;
-                    answer = vertex;
-                } else if (numConnections == maxConnections && vertex.compareTo(answer) < 0) {
-                    answer = vertex;
-                }
-            }
-        }
-
-        for (String vertex : adjList.keySet()) {
-            if (!isVisited.get(vertex)) {
-                int numConnections = bfs(vertex);
-
-                if (numConnections > maxConnections) {
-                    maxConnections = numConnections;
-                    answer = vertex;
-                } else if (numConnections == maxConnections && vertex.compareTo(answer) < 0) {
-                    answer = vertex;
-                }
+            if (numConnections > maxConnections) {
+                maxConnections = numConnections;
+                answer = vertex;
+            } else if (numConnections == maxConnections && vertex.compareTo(answer) < 0) {
+                answer = vertex;
             }
         }
 
@@ -113,6 +92,11 @@ public class MostConnectedNode {
     private int bfs(String source) {
         int output = 0;
         ArrayDeque<String> bfsQueue = new ArrayDeque<>();
+        HashMap<String, Boolean> isVisited = new HashMap<>();
+        for (String vertex : adjList.keySet()) {
+            isVisited.put(vertex, false);
+        }
+
         isVisited.put(source, true);
         bfsQueue.push(source);
 
@@ -134,7 +118,7 @@ public class MostConnectedNode {
     }
 
     public static void main(String[] args) {
-        String[] dataArray = new String[]{"C->D" , "B->C" , "D->B" , "E->F"};
+        String[] dataArray = new String[]{"A->B", "B->A"};
         MostConnectedNode mostConnectedNode = new MostConnectedNode(dataArray);
 
         System.out.println(mostConnectedNode.solve());
