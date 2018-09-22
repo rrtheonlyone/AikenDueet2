@@ -7,6 +7,7 @@ def ImageEXIF(JSONData):
     out = []
     for i in JSONData:
         path = i["path"]
+        print(path)
         out.append(GetImageEXIF(path))
     return out
 
