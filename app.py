@@ -6,6 +6,7 @@ from python.imagegps import ImageEXIF
 from python.sortinggame import fifteenpuzzle
 from python.handwriting import recognize_handwriting
 from python.linearregression import linearRegression
+from python.skilltree import skillTree
 
 app = Flask(__name__)
 api = Api(app)
@@ -74,12 +75,20 @@ class LinearRegression(Resource):
         answer_json = {"answer" : res}
         return jsonify(answer_json)
 
+class SkillTree(Resource):
+    def get(self):
+        return "This is the answer to the skill tree problem"
+    
+    def post(self):
+        json_data = request.get_json(force=True)
+        return skillTree(json_data)
 
 
 api.add_resource(PrimeSum, '/prime-sum')
 api.add_resource(PhotoGps, '/imagesGPS')
 api.add_resource(Handwriting, '/machine-learning/question-2')
 api.add_resource(LinearRegression, '/machine-learning/question-1')
+api.add_resource(SkillTree, '/skill-tree')
 
 if __name__ == '__main__':
     app.run(debug=True)
