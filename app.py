@@ -7,6 +7,9 @@ from python.sortinggame import fifteenpuzzle
 from python.linearregression import linearRegression
 from python.skilltree import skillTree
 from python.tetris import tetris_solver
+from python.handwriting import handwriting_solve
+
+from machinelearning.res import pre_process
 
 import random
 
@@ -65,8 +68,9 @@ class Handwriting(Resource):
 
     def post(self):
         json_data = request.get_json(force=True)
-        print(json_data)
-        return random.randint(0, 9)
+        res = pre_process(json_data["question"])
+        answer_json = {"answer": res}
+        return jsonify(answer_json)
 
 class LinearRegression(Resource):
     def get(self):
