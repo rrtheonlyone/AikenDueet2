@@ -100,4 +100,4 @@ class ImageMetaData(object):
                     lng = 0 - lng
         return lat, lng
 
-# print(ImageEXIF([{"path": 'https://www.thesun.co.uk/wp-content/uploads/2016/04/1394866.main_image.jpg?strip=all'}]))
+print(ImageEXIF([{"path": "https://exposingtheinvisible.org/ckeditor_assets/pictures/32/content_example_ibiza.jpg"}, {"path": "http://www.nikon-photocontest.com/assets/img/p_16.jpg"}]))
