@@ -460,6 +460,7 @@ function tetris(seqx) {
 	        }
 
 	        var data1 = findBest(board, currPiece);
+	        removeClears(Board, true)
 	        dropPiece(Board, data1[0], data1[1], currPiece);
 
 	        out[i] = 10*process(data1[0]) + data1[1];
