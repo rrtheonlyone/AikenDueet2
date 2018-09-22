@@ -494,6 +494,7 @@ function tetris(seqx) {
 	}
 
 	coefficients[1] = (flag) ? -0.25 : coefficients[1];
+	coefficients[3] = (flag) ? 0.6 : coefficients[3];
 
 	flag = 1;
 	for (var i = 0; i < 100; i++) {
@@ -504,8 +505,8 @@ function tetris(seqx) {
 	}
 
 	coefficients[1] = (flag) ? -1.3 : coefficients[1];
-
 	coefficients[1] = (seqx.length > 150) ? -1.7 : coefficients[1];
+	coefficients[3] = (seqx.length > 150) ? 0.6 : coefficients[3];
 
 	console.log(seqx)
 	return runSimulation(seqx);
