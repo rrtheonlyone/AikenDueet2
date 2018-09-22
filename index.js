@@ -314,7 +314,7 @@ function tetris(seqx) {
 
 	   	for (var i = 0; i < 5; i++){
 		   	if (seqx[i+currPieceIndex] == 'I'){
-		   		coefficients[0] = 0.1
+		   		coefficients[0] = -0.05
 	   			break;
 	   		}
 	   	}
