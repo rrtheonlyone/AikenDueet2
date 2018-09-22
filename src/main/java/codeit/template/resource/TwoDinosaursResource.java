@@ -21,7 +21,7 @@ public class TwoDinosaursResource {
     }
 
    	@RequestMapping(value = "two-dinosaurs",method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-    public HashMap<String, BigInteger> solve(@RequestBody TwoDinosaurs body){
+    public HashMap<String, Long> solve(@RequestBody TwoDinosaurs body){
        
         int numFood = body.getNumFood();
         int[] raphael = body.getRaphael();
@@ -29,10 +29,10 @@ public class TwoDinosaursResource {
         int maxDiff = body.getMaxDiff();
 
     	TwoDinosaursSolution dinosaurs = new TwoDinosaursSolution(numFood, raphael, leonardo, maxDiff);
-        BigInteger res = dinosaurs.solve();
+        long res = dinosaurs.solve();
 
 
-        HashMap<String, BigInteger> output = new HashMap<>();
+        HashMap<String, Long> output = new HashMap<>();
         output.put("result", res);
 
         return output;
