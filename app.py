@@ -2,7 +2,7 @@ from flask import Flask, jsonify, request
 from flask_restful import Resource, Api, reqparse
 
 from python.primesum import primeSum
-from python.`imagegps import ImageEXIF
+from python.imagegps import ImageEXIF
 
 app = Flask(__name__)
 api = Api(app)
