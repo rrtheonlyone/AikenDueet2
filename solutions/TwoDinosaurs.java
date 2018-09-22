@@ -3,65 +3,84 @@ import java.math.BigInteger;
 public class TwoDinosaurs {
 
     private static final int OFFSET = 400000;
-    private static final BigInteger NOT_CALC = BigInteger.valueOf(-1);
 
     private int numFood;
     private int[] raphael;
     private int[] leonardo;
     private int maxDiff;
-    private BigInteger[][] memoTable; // prepare for BigInteger
-
-    private BigInteger dp(int foodIndex, int difference) {
-        if (foodIndex >= numFood) {
-            if (Math.abs(difference) <= maxDiff) {
-                return BigInteger.ONE;
-            } else {
-                return BigInteger.ZERO;
-            }
-        } else if (memoTable[foodIndex][difference + OFFSET] != NOT_CALC) {
-            return memoTable[foodIndex][difference + OFFSET];
-        }
-
-        BigInteger ans = BigInteger.ZERO;
-
-        // Take both
-        ans = ans.add(dp(foodIndex + 1,difference + raphael[foodIndex] - leonardo[foodIndex]));
-        // Take Raphael
-        ans = ans.add(dp(foodIndex + 1, difference + raphael[foodIndex]));
-        // Take Leo
-        ans = ans.add(dp(foodIndex + 1, difference - leonardo[foodIndex]));
-        // Take nothing
-        ans = ans.add(dp(foodIndex + 1, difference));
-
-        return memoTable[foodIndex][difference + OFFSET] = ans;
-    }
-
 
     public TwoDinosaurs(int numFood, int[] raphael, int[] leonardo, int maxDiff) {
         this.numFood = numFood;
         this.raphael = raphael;
         this.leonardo = leonardo;
         this.maxDiff = maxDiff;
+    }
 
+    public BigInteger solve() {
         int maxIntermediateDiff = 0;
         for (int food : raphael) {
             maxIntermediateDiff += food;
         }
+        int memoSize = maxIntermediateDiff + OFFSET + 1;
 
-        memoTable = new BigInteger[numFood][maxIntermediateDiff + OFFSET + 1];
-        for (int i = 0; i < numFood; ++i) {
-            for (int j = 0; j < maxIntermediateDiff + OFFSET + 1; ++j) {
-                memoTable[i][j] = NOT_CALC;
-            }
+        BigInteger[] memoTable = new BigInteger[memoSize];
+        for (int i = 0; i < memoSize; ++i) {
+            memoTable[i] = BigInteger.ZERO;
         }
-    }
 
-    public BigInteger solve() {
-        return dp(0, 0);
+        memoTable[OFFSET] = BigInteger.ONE; // Initial value
+
+        int[][] cases = new int[4][2];
+        cases[0][0] = 1; cases[0][1] = 1; // Eat both
+        cases[1][0] = 0; cases[1][1] = 1; // Leonard eats
+        cases[2][0] = 1; cases[2][1] = 0; // Raphael eats
+        cases[3][0] = 0; cases[3][1] = 0; // No one eats.
+
+        for (int foodIndex = 0; foodIndex < numFood; ++foodIndex) {
+            BigInteger[] tempMemoTable = new BigInteger[memoSize];
+            for (int i = 0; i < memoSize; ++i) {
+                tempMemoTable[i] = BigInteger.ZERO;
+            }
+
+            for (int diff = 0; diff < memoSize; ++diff) {
+                if (memoTable[diff].equals(BigInteger.ZERO)) {
+                    continue;
+                }
+
+                for (int i = 0; i < 4; ++i) {
+                    int nextDiff = diff + cases[i][0] * raphael[foodIndex] - cases[i][1] * leonardo[foodIndex];
+                    if (nextDiff >= 0 && nextDiff < memoSize) {
+                        tempMemoTable[nextDiff] = tempMemoTable[nextDiff].add(memoTable[diff]);
+                    }
+                }
+            }
+
+            memoTable = tempMemoTable;
+        }
+
+        BigInteger output = BigInteger.ZERO;
+        for (int i = Math.max(0, OFFSET - maxDiff); i <= Math.min(memoSize - 1, OFFSET + maxDiff); ++i) {
+            output = output.add(memoTable[i]);
+        }
+
+        return output;
     }
 
     public static void main(String[] args) {
-        TwoDinosaurs dinosaurs = new TwoDinosaurs(2, new int[]{4, 5}, new int[]{3, 6}, 3);
+//        int size = 200;
+//        int[] raph = new int[size];
+//        int[] leo = new int[size];
+//        for (int i = 0; i < size; ++i) {
+//            raph[i] = 2000 - i;
+//            leo[i] = 1800 + i;
+//        }
+//
+//        TwoDinosaurs dinosaurs = new TwoDinosaurs(size, raph, leo, 200000);
+
+        int[] raph = new int[] {4, 5};
+        int[] leo = new int[] {3, 6};
+
+        TwoDinosaurs dinosaurs = new TwoDinosaurs(2, raph, leo,3);
         System.out.println(dinosaurs.solve());
     }
 }
