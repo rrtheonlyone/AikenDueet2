@@ -27,8 +27,8 @@ def primeSum(n):
         k -= 1
 
     if (k < 2 and n != 0):
-        print initn
+        print (initn)
     else:
-        print out
+        print (out)
 
-primeSum(int(raw_input()))
+primeSum(int(input()))
