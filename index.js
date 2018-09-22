@@ -493,8 +493,9 @@ function tetris(seqx) {
 		}
 	}
 
-	coefficients[1] = (flag) ? -0.25 : coefficients[1];
+	coefficients[1] = (flag) ? -0.5 : coefficients[1];
 	coefficients[3] = (flag) ? 0.35 : coefficients[3];
+	coefficients[0] = (flag) ? -0.6 : coefficients[0];
 
 	flag = 1;
 	for (var i = 0; i < 100; i++) {
