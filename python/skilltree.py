@@ -48,7 +48,7 @@
 
 
 def skillTree(inputJSON):
-    head = ["zzlaten", "zzlaten", "zlaten"]
+    head = ["zzlaten", "zzlaten", "zzlaten"]
     numberSkills = [1, 1, 1]
     currcostSkills = [0, 0, 0]
     currvalueSkills = [0,0,0]
