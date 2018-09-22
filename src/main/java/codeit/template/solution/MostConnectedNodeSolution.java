@@ -41,6 +41,11 @@ public class MostConnectedNodeSolution {
     private HashMap<String, Integer> incomingDegree;
 
     public MostConnectedNodeSolution(String[] dataArray) {
+        
+        System.out.println(Arrays.toString(dataArray));
+        System.out.println(dataArray.length);
+
+
         adjList = new TreeMap<>();
         incomingDegree = new HashMap<>();
 
