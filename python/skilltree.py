@@ -87,7 +87,7 @@ def skillTree(inputJSON):
                     if bestcost > currcost:
                         bestcost = currcost
                         bestoutput = (i, j, k)
-                        break;
+                    break;
 
     out = []
     for i in range(len(bestoutput)):
