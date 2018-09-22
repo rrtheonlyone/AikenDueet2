@@ -19,19 +19,16 @@ class Optimizer():
         drops = []
         for rotation, tetromino_ in enumerate(rotations):
             for column in range(Field.WIDTH):
-                try:
-                    f = field.copy()
-                    row = f.drop(tetromino_, column)
-                    drops.append({
-                        'field': f,
-                        'field_gaps': f.count_gaps(),
-                        'field_height': f.heights(),
-                        'tetromino_rotation': rotation,
-                        'tetromino_column': column,
-                        'tetromino_row': row
-                    })
-                except AssertionError:
-                    continue
+                f = field.copy()
+                row = f.drop(tetromino_, column)
+                drops.append({
+                    'field': f,
+                    'field_gaps': f.count_gaps(),
+                    'field_height': f.heights(),
+                    'tetromino_rotation': rotation,
+                    'tetromino_column': column,
+                    'tetromino_row': row
+                })
 
         # First, we pick out all the drops that will produce the least
         # amount of gaps.
