@@ -221,7 +221,6 @@ function tetris(seqx) {
 	var randString = "OIJLTSZ";
 	var randInput = randString.split(" ");
 	var randIndex = 0;
-	var gameMode = 0;
 
 	function initialize() {
 	    for (var i = 0; i < BOARD_HEIGHT; i++) {
@@ -284,12 +283,7 @@ function tetris(seqx) {
 	    var heights = [BOARD_WIDTH];
 	    var prevHeight = 0;
 	    var currHeight = 0;
-
-
-	    var newWidth = BOARD_WIDTH;
-	    if (currPiece != 'I' && gameMode && firstHeight < 10) newWidth--;
-
-	    for (var i = 0; i < newWidth; i++) {
+	    for (var i = 0; i < BOARD_WIDTH; i++) {
 	        var startCountingHeight = false;
 	        prevHeight = currHeight;
 	        currHeight = 0;
@@ -485,7 +479,7 @@ function tetris(seqx) {
 	    -0.0439177];
 
 	main();
-	gameMode = (seqx.length > 150) ? 1 : 0;
+
 
 	//seqx only contains S, Z and T -> co[1] = -0.25
 	//seqx only contains O and I -> co[1] = -1.3
