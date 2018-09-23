@@ -96,22 +96,7 @@ var nameToIDMap = [[0],                     // O
 // Board holds the state of the board as it is manipulated by the AI. Type: [char][char]
 var Board = [];
 
-// Coefficients:
-//     coefficients[0] * heightDifferences +
-//     coefficients[1] * numHoles +
-//     coefficients[2] * (BOARD_HEIGHT - maxHeight) +
-//     coefficients[3] * numCleared +
-//     coefficients[4] * firstHeight +
-//     coefficients[5] * lastHeight +
-//     coefficients[6] * numBlockades;
-var coefficients = [
-    -0.192716,
-    -1,
-    0.00742194,
-    0.292781,
-    0.182602,
-    0.175692,
-    -0.0439177];
+
 
 /* can be improved by only checking rows that the last piece was inserted in !!
  *  also by using something other than erase, insert.*/
@@ -217,7 +202,7 @@ function generateRandomPiece() {
 }
 
 // var randString = "0 1 2 3 4 5 6";
-var randString = "OIJLTSZ";
+var randString = "SSOLJIOSSJISJTSJZTSOLLTJJTJZIJTSJZTJLLIZTTOZTSIIILSLZLTOIJSZLOLISIJSOLTZTZTJIISTSJTOJZOLSTISSOLSLTILSJZTIIZTIJOJLLZLTIJZSJLIZJLJSIJJTJJLISOOLLJTITJJTJZILITTZIZTJSSZJOJSIIIJZLZIOOLIIIJJJOOOSLTZIOITZTOZLJLLLTOIIIZJOOTOJLSSTSLOILZTOZJTTZIJIZIZZTOSSLLITLSIJITOOLSOJJSLJOZZLTJLSSIOTZLSIIZJLZIJIJTIOJLLTJILIOZOSJTIOJTTSZZSZSSTISOTZOLSTZJIIJLZIJTTSSSJTOITJISOZJJZOTZIJTJSSZIJJOTIIJZOTTLLTZIZSOZLJLOOOLTZTTTTLITLSTSLIISJSLOTITSTTZJJTJSOTOITSLTOLSILJLSSZTSJZJIIITJTJTTZTSJIZLZSJILSLTTOZOJITZZJILTSJTSTTTLZOJOSOITJLJZOZTJZZZZJTOJJOJLJITJOJIILJIOSJITJLSOOZOOSJSSSJTIOSLTOIOLTISOTIOTTZTZJOZILSZTZSJITJSLSOLZOSOTOISOLZSSLOJITLOSLSILTOSLLOLISTOJIIIZJITLSZOIOJLITLZSSOZITTLIITZILLZJLOSJOTSLTLOLTIJZJIZJOOTSTJOZJLTSOOSZJILJLLOLLZTOTJSTIILZOZOITSIJLSSLOOOSOZZITILZTSILZISZSZTJJSOLZOSISJISLOOSOLTOOOZLZZLZLLOJZLIZJJLJJOTLZZSZIILLLJLSJSLTSLZJJSZIZOLZJTSIISJITJTOOSSSSLSISOTTZTTJTZTTITIZOSJILTOJZTLJLOLTTOJTJTLJLJSOSTSIOSTOTZILZZZIIJZOJZLOTJSOTLOTTIOZLITIJIOLIILSJZJZOJTTSTOLOJOILZJISLSZLJTJJOILLOTZJLSSTIJISTJJITOJTTSTS"
 var randInput = randString.split(" ");
 var randIndex = 0;
 
@@ -255,6 +240,9 @@ function printBoard() {
     console.log(output);
 }
 
+var tetriss = 0;
+var gameMode = 0;
+
 function calculateFitness(board, numCleared){
     var totalHeight = 0,
         maxHeight = 0,
@@ -282,7 +270,10 @@ function calculateFitness(board, numCleared){
     var heights = [BOARD_WIDTH];
     var prevHeight = 0;
     var currHeight = 0;
-    for (var i = 0; i < BOARD_WIDTH; i++) {
+    
+    var newWidth = BOARD_WIDTH;
+    if (currPiece != "I" && gameMode && firstHeight < 10){newWidth--;}
+    for (var i = 0; i < newWidth; i++) {
         var startCountingHeight = false;
         prevHeight = currHeight;
         currHeight = 0;
@@ -310,10 +301,23 @@ function calculateFitness(board, numCleared){
         }
         heights.push(currHeight);
     }
+    if (numCleared == 4){
+        tetriss += 8;
+    }
+    else if (numCleared == 3){
+        tetriss += 5;
+    }
+    else if (numCleared == 2){
+        tetriss += 3;
+    }
+    else if (numCleared == 1){
+        tetriss += 1;
+    }
+
     var fitness =   coefficients[0] * heightDifferences +
                     coefficients[1] * numHoles +
                     coefficients[2] * (BOARD_HEIGHT - maxHeight) +
-                    coefficients[3] * numCleared +
+                    coefficients[3] * numCleared*numCleared +
                     coefficients[4] * firstHeight +
                     coefficients[5] * lastHeight +
                     coefficients[6] * numBlockades;
@@ -353,6 +357,39 @@ function calculateFitness(board, numCleared){
     // }
 }
 
+function getBoardHeight(board){
+    var best = 0;
+    for (var i = 0; i < BOARD_WIDTH; i++){
+        var startCountingHeight = false;
+        var currHeight = 0;
+        for (var j = 0; j < BOARD_HEIGHT; j++) {
+            if (board[j][i] != -1) {startCountingHeight = true;}
+            if (startCountingHeight) {
+                currHeight = BOARD_HEIGHT - j;
+                break;
+            }
+        }
+        if (currHeight > best) best = currHeight;
+    }
+    return best;
+}
+
+// Coefficients:
+//     coefficients[0] * heightDifferences +
+//     coefficients[1] * numHoles +
+//     coefficients[2] * (BOARD_HEIGHT - maxHeight) +
+//     coefficients[3] * numCleared +
+//     coefficients[4] * firstHeight +
+//     coefficients[5] * lastHeight +
+//     coefficients[6] * numBlockades;
+var coefficients = [
+    -0.192716,
+    -1,
+    0.00742194,
+    0.392781,
+    0.182602,
+    0.0,
+    -0.0439177];
 
 var currPiece;
 var secondLevel = false;
@@ -362,7 +399,9 @@ function findBest(board, piece) {
     var pieceIDs = nameToIDMap[pieceName];
     var bestID = pieceIDs[0], bestCol = 0, bestScore = -999999;
     for (var i = 0; i < pieceIDs.length; i++) {
-        for (var j = 0; j <= BOARD_WIDTH - PIECES[pieceIDs[i]][0].length; j++) {
+        var something = BOARD_WIDTH - PIECES[pieceIDs[i]][0].length;
+        if (pieceName != 1 && getBoardHeight(board) < 10) {something--;}
+        for (var j = 0; j <= something; j++) {
             // secondLevel = false;
             // copy board
             var board2 = [];
@@ -445,6 +484,8 @@ function runSimulation(seq) {
 
         var data1 = findBest(board, currPiece);
         dropPiece(Board, data1[0], data1[1], currPiece);
+        removeClears(Board, true);
+
 
         out[i] = 10*process(data1[0]) + data1[1];
         printBoard();
@@ -459,3 +500,4 @@ function main() {
 
 main();
 console.log(runSimulation(randString));
+console.log(tetriss);
