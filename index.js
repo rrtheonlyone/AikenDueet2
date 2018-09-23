@@ -384,7 +384,7 @@ function tetris(seqx) {
 	    for (var i = 0; i < pieceIDs.length; i++) {
 	    	// Beginning of David's stuff
     		var jLimit = BOARD_WIDTH - PIECES[pieceIDs[i]][0].length;
-			if (pieceName != 1 && getBoardHeight(board) < 8) {
+			if (pieceName != 1 && getBoardHeight(board) < 9 && gameMode == 1) {
 				--jLimit;
 			}
 
@@ -533,8 +533,8 @@ function tetris(seqx) {
 	// coefficients[1] = (flag) ? -1.3 : coefficients[1];
 	// coefficients[1] = (seqx.length > 150) ? -1.0 : coefficients[1];
 	// coefficients[3] = (seqx.length > 150) ? 0.35 : coefficients[3];
-
-	console.log(seqx)
+	var gameMode = (seqx.length > 150) ? 1 : 0;
+	console.log(seqx);
 	return runSimulation(seqx);
 
 }
