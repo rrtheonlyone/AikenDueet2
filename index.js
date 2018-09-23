@@ -316,7 +316,7 @@ function tetris(seqx) {
 	    var fitness =   coefficients[0] * heightDifferences +
 	                    coefficients[1] * numHoles +
 	                    coefficients[2] * (BOARD_HEIGHT - maxHeight) +
-	                    coefficients[3] * numCleared +
+	                    coefficients[3] * numCleared * numCleared +
 	                    coefficients[4] * firstHeight +
 	                    coefficients[5] * lastHeight +
 	                    coefficients[6] * numBlockades;
