@@ -476,7 +476,7 @@ function tetris(seqx) {
 	        removeClears(Board, true)
 
 	        out[i] = 10*process(data1[0]) + data1[1];
-	        // printBoard();
+	        printBoard();
 	    }
 	    return out;
 	}
