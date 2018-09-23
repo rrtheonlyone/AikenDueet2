@@ -384,7 +384,7 @@ function tetris(seqx) {
 	    for (var i = 0; i < pieceIDs.length; i++) {
 	    	// Beginning of David's stuff
     		var jLimit = BOARD_WIDTH - PIECES[pieceIDs[i]][0].length;
-			if (pieceName != 1 && getBoardHeight(board) < 9 && gameMode == 1) {
+			if (pieceName != 1 && getBoardHeight(board) < 10 && gameMode == 1) {
 				--jLimit;
 			}
 
@@ -498,9 +498,9 @@ function tetris(seqx) {
 	    -0.192716,
 	    -1,
 	    0.00742194,
-	    0.292781,
+	    0.392781,
 	    0.182602,
-	    0.175692,
+	    0.075692,
 	    -0.0439177];
 
 	main();
