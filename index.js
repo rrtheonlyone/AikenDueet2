@@ -283,7 +283,12 @@ function tetris(seqx) {
 	    var heights = [BOARD_WIDTH];
 	    var prevHeight = 0;
 	    var currHeight = 0;
-	    for (var i = 0; i < BOARD_WIDTH; i++) {
+
+
+	    var newWidth = BOARD_WIDTH;
+	    if (currPiece != 'I') newWidth--;
+
+	    for (var i = 0; i < newWidth; i++) {
 	        var startCountingHeight = false;
 	        prevHeight = currHeight;
 	        currHeight = 0;
