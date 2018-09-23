@@ -256,6 +256,8 @@ function tetris(seqx) {
 	    console.log(output);
 	}
 
+
+
 	function calculateFitness(board, numCleared){
 	    var totalHeight = 0,
 	        maxHeight = 0,
@@ -354,6 +356,23 @@ function tetris(seqx) {
 	    // }
 	}
 
+	function getBoardHeight(board){
+	    var best = 0;
+	    for (var i = 0; i < BOARD_WIDTH; i++){
+	        var startCountingHeight = false;
+	        var currHeight = 0;
+	        for (var j = 0; j < BOARD_HEIGHT; j++) {
+	            if (board[j][i] != -1) {startCountingHeight = true;}
+	            if (startCountingHeight) {
+	                currHeight = BOARD_HEIGHT - j;
+	                break;
+	            }
+	        }
+	        if (currHeight > best) best = currHeight;
+	    }
+	    return best;
+	}
+
 
 	var currPiece;
 	var secondLevel = false;
@@ -363,7 +382,13 @@ function tetris(seqx) {
 	    var pieceIDs = nameToIDMap[pieceName];
 	    var bestID = pieceIDs[0], bestCol = 0, bestScore = -999999;
 	    for (var i = 0; i < pieceIDs.length; i++) {
-	        for (var j = 0; j <= BOARD_WIDTH - PIECES[pieceIDs[i]][0].length; j++) {
+	    	// Beginning of David's stuff
+    		var jLimit = BOARD_WIDTH - PIECES[pieceIDs[i]][0].length;
+			if (pieceName != 1 && getBoardHeight(board) < 10) {
+				--jLimit;
+			}
+
+	        for (var j = 0; j <= jLimit; j++) {
 	            // secondLevel = false;
 	            // copy board
 	            var board2 = [];
