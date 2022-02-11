@@ -32,7 +32,7 @@ opencv-python==3.4.3.18
 pandas==0.23.4
 pbr==3.1.1
 Pillow==5.2.0
-protobuf==3.6.1
+protobuf==3.15.0
 pyasn1==0.4.4
 pyasn1-modules==0.2.2
 pyparsing==2.2.1
